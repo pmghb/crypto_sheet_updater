@@ -14,12 +14,18 @@ Configuration is done via the `csu_config.py` file. The documentation related to
 ## Prerequisites
 ### Python 3
 You will need a working Python 3 environment to run the script.
-- For Windows or Mac, you can go to https://www.python.org/downloads/ to download and install it.
+- For Windows or Mac, you can go to https://www.python.org/downloads/ to download and install it. <strong>When installing Python on Windows with the installer tool, check the box "Add python.exe to PATH".</strong>
 - For a Debian based Linux, you can run the following command lines:
     ```sh
     sudo apt update
     sudo apt install python3
     ```
+### Python dependencies
+Once your Python installation is up and running, you'll also need the numbers_parser, openpyxl and requests dependencies. You can install them with pip command:
+```sh
+pip install numbers_parser openpyxl requests
+```
+
 ### CoinMarketCap token
 To access the CoinMarketCap API, you will need a personal token. To get one go to https://pro.coinmarketcap.com/signup/ , create an account and a personal token on Basic Plan.
 
@@ -44,7 +50,13 @@ cd crp_sheet_updater
 
 Open the file `csu_config.py` and adapt the configuration to match your spreadsheet file.
 
-Before running the script, run the test module with the following command line:
+Before running the script, run the test module with one of the following command lines, depending of your OS and Path configuration:
+```sh
+python -m unittest -v tests.py
+```
+
+or 
+
 ```sh
 python3 -m unittest -v tests.py
 ```
@@ -56,6 +68,6 @@ If you have an error, check the logs to try to identify the problem. If this see
 
 Otherwise, if all is well, you can run the main script:
 ```sh
-python3 csu.py
+python csu.py
 ```
 You should now have the latest price of all your tokens.
