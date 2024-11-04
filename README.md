@@ -1,4 +1,4 @@
-# Crp sheet updater
+# Crypto sheet updater
 
 ## Description
 This project allows to quickly update a token portfolio managed in an Apple Numbers or Microsoft Excel spreadsheet.
@@ -9,7 +9,9 @@ Configuration is done via the `csu_config.py` file. The documentation related to
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
+- [Limitations](#limitations)
 - [Usage](#usage)
+- [Contributing](#contributing)
 
 ## Prerequisites
 ### Python 3
@@ -41,6 +43,9 @@ Your spreadsheet may contains multiple sheets, tables or columns in any order, t
 The repository contains two test files (test_sheet) that you can consult. They contain several tables for testing purposes, but only one is needed:\
 <img src="sc_1_example.png" alt="Sheet example" width="400"/>
 
+## Limitations
+<strong>For now, token tables must be sorted by Token ID name (BTC, ETH, COL, ...) before running the script.</strong>
+
 ## Usage
 Either download the project zip and extract it, or clone the repository via the command line, and open the project folder.
 ```sh
@@ -71,3 +76,11 @@ Otherwise, if all is well, you can run the main script:
 python csu.py
 ```
 You should now have the latest price of all your tokens.
+
+## Contributing
+If you wish, you can contribute to the project by submitting new ideas, or directly through pull requests.
+
+You can also support my work by making a donation:
+- USDC (BEP20) : 0x334503140dbaeae22c61011403e6c8dadf6d17a5
+- BTC (SegWit) : bc1qu7sd0xahdagyj9ta3wenx9xgadjy4lwkk4uvn4
+- ETH (ERC20) : 0x75BE08A02fFC8021A96E4264CD8ad393CCE65981
