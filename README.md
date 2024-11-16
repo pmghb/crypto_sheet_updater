@@ -12,6 +12,7 @@ Configuration is done via the `csu_config.py` file. The documentation related to
 - [Limitations](#limitations)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Changelog](#changelog)
 
 ## Prerequisites
 ### Python 3
@@ -44,7 +45,7 @@ The repository contains two test files (test_sheet) that you can consult. They c
 <img src="sc_1_example.png" alt="Sheet example" width="400"/>
 
 ## Limitations
-<strong>For now, token tables must be sorted by Token ID name (BTC, ETH, COL, ...) before running the script.</strong>
+With Numbers: input file formats are not preserved.
 
 ## Usage
 Either download the project zip and extract it, or clone the repository via the command line, and open the project folder.
@@ -84,3 +85,11 @@ You can also support my work by making a donation:
 - USDC (BEP20) : 0x334503140dbaeae22c61011403e6c8dadf6d17a5
 - BTC (SegWit) : bc1qu7sd0xahdagyj9ta3wenx9xgadjy4lwkk4uvn4
 - ETH (ERC20) : 0x75BE08A02fFC8021A96E4264CD8ad393CCE65981
+
+## Changelog
+### v1.0.1
+Order of entry token list is now preserved. If the output file is not the same as the input file, the output file is re-created before writing to avoid an order conflict when writing. Any changes made in the output file will be lost.
+
+### v1.0.0
+First working version.\
+Limitation : token tables must be sorted by Token ID name (BTC, ETH, COL, ...) before running the script.

@@ -200,6 +200,20 @@ class CMCAPITests(unittest.TestCase):
         self.assertEqual(coins[2].name, "SOL")
         self.assertGreater(coins[2].price, 0)
 
+    def test_get_valid_data_and_order_from_cmc_api(self):
+        """Tries to get valid data and check that order is conserved from CoinMarketCap API."""
+        token_set = "BTC,SOL,ETH"
+        config = Config(CSUConfig())
+
+        coins = get_data_from_cmc_api(token_set, config)
+
+        self.assertEqual(coins[0].name, "BTC")
+        self.assertGreater(coins[0].price, 0)
+        self.assertEqual(coins[1].name, "SOL")
+        self.assertGreater(coins[1].price, 0)
+        self.assertEqual(coins[2].name, "ETH")
+        self.assertGreater(coins[2].price, 0)
+
     def test_get_invalid_data_from_cmc_api(self):
         """Tries to send a bad coin to CoinMarketCap API."""
         token_set = "BTC,ETH,TOTOZ"

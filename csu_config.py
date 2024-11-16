@@ -11,7 +11,8 @@ class CSUConfig:
         "input_path": "test_sheet.xlsx",
 
         # Path to the spreadsheet file that will be updated with the new values.
-        # You can use the same as input_path but formats may be altered or file broken.
+        # When running the script, if this file is not the same as the input it will be re created to avoid order issues, so any changes in it will be lost.
+        # You can use the same path as input_path but formats will be altered or file may be broken.
         # If you are using the same file, make a save!
         "output_path": "test_sheet_update.xlsx"
     }

@@ -2,6 +2,7 @@
 """Module to update a portfolio tracking sheet."""
 
 from datetime import date
+import os
 import sys
 import requests
 import numbers_parser
@@ -22,6 +23,11 @@ def main():
         coins = []
         for token_set in token_list:
             coins += get_data_from_cmc_api(token_set, config)
+
+        # As order can differs between input file and previous updated file, we detete it.
+        if config.input_path != config.output_path:
+            if os.path.isfile(config.output_path):
+                os.remove(config.output_path)
 
         update_numbers_sheet(numbers_doc, coins, config)
     else:
@@ -143,9 +149,11 @@ def get_data_from_cmc_api(token_set: str, config: Config) -> list[Coin]:
         sys.exit(f"ERROR : unable to fetch data for '{token_set}': {error_message}")
 
     # Otherwise formats and returns a list of Coins.
+    tokens = token_set.split(",")
     coins = []
-    for coin_name, value in rsp_json["data"].items():
-        if len(value) > 0:
+    for coin_name in tokens:
+        value = rsp_json["data"].get(coin_name, {})
+        if value:
             price = value[0]["quote"]["USD"]["price"]
             if price is None:
                 print(f"ERROR : no price for {coin_name}, price set to 0. Continuing.")
@@ -163,10 +171,13 @@ def update_numbers_sheet(numbers_doc: NumbersDoc, coins: list[Coin], config: Con
     cur_date = date.today().strftime('%d/%m/%Y')
 
     for coin in coins:
-        numbers_doc.table.write(cur_row_index, config.table_coin_price_col_index, coin.price)
+        cell = numbers_doc.table.cell(cur_row_index, config.table_coin_price_col_index)
+        numbers_doc.table.write(cur_row_index, config.table_coin_price_col_index, coin.price, style=cell.style)
+        numbers_doc.table.set_cell_formatting(cur_row_index, config.table_coin_price_col_index, "number")
 
         if config.table_date_col_index > -1:
-            numbers_doc.table.write(cur_row_index, config.table_date_col_index, cur_date)
+            cell = numbers_doc.table.cell(cur_row_index, config.table_date_col_index)
+            numbers_doc.table.write(cur_row_index, config.table_date_col_index, cur_date, style=cell.style)
 
         cur_row_index += 1
 
